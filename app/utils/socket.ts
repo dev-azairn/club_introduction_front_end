@@ -1,7 +1,7 @@
 import { io, type Socket } from 'socket.io-client';
 
 // autoConnect: false is crucial to prevent the "Chicken and Egg" error
-export type GameState = 'LOBBY' | 'VOTING' | 'FINISHED';
+export type GameState = 'CLOSED' | 'LOBBY' | 'VOTING' | 'FINISHED' ;
 
 export interface WinnerData {
     studentId: string;
@@ -23,6 +23,8 @@ export interface ServerToClientEvents {
     game_over: (winners: WinnerData[]) => void;
     connect_error: (err: Error) => void;
     update_user_list: (users: any[]) => void;
+    token_expired: () => void;
+    delete_token: () => void;
 }
 
 export interface ClientToServerEvents {

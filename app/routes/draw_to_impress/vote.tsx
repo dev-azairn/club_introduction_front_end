@@ -4,7 +4,7 @@ import { socket, type RoundData } from '~/utils/socket';
 
 
 const VoteApp: React.FC = () => {
-    const [roundData, setRoundData] = useState<RoundData | null>(null);
+  const [roundData, setRoundData] = useState<RoundData | null>(null);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [hasVoted, setHasVoted] = useState<boolean>(false);
   const [selectedScore, setSelectedScore] = useState<number>(1);

@@ -1,20 +1,34 @@
-import React from 'react';
-import { useOutletContext } from 'react-router';
+import React, { useEffect } from 'react';
+import { useOutletContext, useNavigate } from 'react-router';
 import { type WinnerData } from '~/utils/socket';
-
+import { SERVER_PATH } from'~/utils/dotenv';
+ 
 interface ResultContextType {
     results: WinnerData[];
 }
 
 const DrawResult: React.FC = () => {
   const { results } = useOutletContext<ResultContextType>();
-
+  const navigate = useNavigate();
+  useEffect(
+    () => {
+        if (results.length == 0)
+           navigate('/draw_to_impress');
+    }, [navigate])
   // [FIX 1] Use your server proxy, NOT Google directly
   const getImageUrl = (fileId: string) => {
       // Make sure this port matches your server (3000)
-      return `http://localhost:3000/api/image/${fileId}`;
+      return `${SERVER_PATH}/api/image/${fileId}`;
   };
 
+  const handleGoHome = () => {
+      // 1. Clear the token to ensure a fresh start
+      localStorage.removeItem('game_token');
+      
+      // 2. Use window.location to force a full page refresh
+      // This ensures the socket disconnects and React state resets completely.
+      window.location.href = '/draw_to_impress'; 
+  };
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center py-10 px-4">
       
@@ -82,11 +96,17 @@ const DrawResult: React.FC = () => {
                     <div className="text-4xl font-black text-white mr-4">
                         {player.finalScore}
                     </div>
+                    
                 </div>
             ))
         )}
       </div>
-
+        <button 
+        onClick={handleGoHome}
+        className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95"
+      >
+        🏠 Back to Home
+      </button>
     </div>
   );
 };

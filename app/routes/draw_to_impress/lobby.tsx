@@ -10,7 +10,6 @@ interface LobbyContextType {
 const DrawLobby: React.FC = () => {
   // 2. Instead of useState, we grab 'users' from the parent Layout
   const { users } = useOutletContext<LobbyContextType>();
-
   // 3. Safety Check: Ask server for the list again when this specific page loads
   // This ensures if the user refreshed or navigated quickly, we get the data.
   useEffect(() => {

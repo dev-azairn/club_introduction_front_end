@@ -8,6 +8,6 @@ dotenv.config()
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   define: {
-    "process.env.REACT_APP_SERVER_PATH": JSON.stringify(process.env.REACT_APP_SERVER_PATH),
+    "process.env.VITE_SERVER_PATH": JSON.stringify(process.env.VITE_SERVER_PATH),
   }
 });

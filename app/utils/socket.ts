@@ -33,7 +33,7 @@ export interface ClientToServerEvents {
     request_user_list: () => void;
 }
 
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(SERVER_PATH, {
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(`https://${SERVER_PATH}`, {
     autoConnect: false,
     reconnection: true,
     transports: ['websocket'],

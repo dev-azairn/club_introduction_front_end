@@ -1,3 +1,3 @@
 
-export const SERVER_PATH = import.meta.env.VITE_SERVER_PATH ?? "";
+export const SERVER_PATH = "http://" + (import.meta.env.VITE_SERVER_PATH ?? "");
 

@@ -1,4 +1,5 @@
 import { io, type Socket } from 'socket.io-client';
+import { SERVER_PATH } from './dotenv';
 
 // autoConnect: false is crucial to prevent the "Chicken and Egg" error
 export type GameState = 'CLOSED' | 'LOBBY' | 'VOTING' | 'FINISHED' ;
@@ -32,7 +33,7 @@ export interface ClientToServerEvents {
     request_user_list: () => void;
 }
 
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3000", {
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(SERVER_PATH, {
     autoConnect: false,
     reconnection: true,
     transports: ['websocket'],
